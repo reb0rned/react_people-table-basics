@@ -23,9 +23,7 @@ const PersonLink: React.FC<PersonLinkProps> = ({
 }) => {
   const targetPerson =
     person ||
-    (personName
-      ? people.find(p => p.name === personName)
-      : undefined);
+    (personName ? people.find(p => p.name === personName) : undefined);
 
   if (!targetPerson) {
     return <>{personName || '-'}</>;
@@ -34,7 +32,9 @@ const PersonLink: React.FC<PersonLinkProps> = ({
   return (
     <Link
       to={`/people/${targetPerson.slug}`}
-      className={cn({ 'has-text-danger': isMother && targetPerson.sex === 'f' })}
+      className={cn({
+        'has-text-danger': isMother && targetPerson.sex === 'f',
+      })}
     >
       {targetPerson.name}
     </Link>
