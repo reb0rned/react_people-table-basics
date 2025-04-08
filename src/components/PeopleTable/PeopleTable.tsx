@@ -46,18 +46,19 @@ export const PeopleTable = () => {
             <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
-              {person.mother ? (
-                <PersonLink person={person.mother} isMother />
-              ) : (
-                person.motherName || '-'
-              )}
+              <PersonLink
+                person={person.mother}
+                personName={person.motherName || undefined}
+                people={people}
+                isMother
+              />
             </td>
             <td>
-              {person.father ? (
-                <PersonLink person={person.father} />
-              ) : (
-                person.fatherName || '-'
-              )}
+              <PersonLink
+                person={person.father}
+                personName={person.fatherName || undefined}
+                people={people}
+              />
             </td>
           </tr>
         ))}

@@ -2,21 +2,41 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
+interface Person {
+  name: string;
+  slug: string;
+  sex: string;
+}
+
 interface PersonLinkProps {
-  person: { name: string; slug: string; sex: string };
+  person?: Person;
+  personName?: string;
+  people: Person[];
   isMother?: boolean;
 }
 
 const PersonLink: React.FC<PersonLinkProps> = ({
   person,
+  personName,
+  people,
   isMother = false,
 }) => {
+  const targetPerson =
+    person ||
+    (personName
+      ? people.find(p => p.name === personName)
+      : undefined);
+
+  if (!targetPerson) {
+    return <>{personName || '-'}</>;
+  }
+
   return (
     <Link
-      to={`/people/${person.slug}`}
-      className={cn({ 'has-text-danger': isMother && person.sex === 'f' })}
+      to={`/people/${targetPerson.slug}`}
+      className={cn({ 'has-text-danger': isMother && targetPerson.sex === 'f' })}
     >
-      {person.name}
+      {targetPerson.name}
     </Link>
   );
 };
